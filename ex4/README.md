@@ -10,6 +10,8 @@ chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 ```
 
+Is important that a mysql user and databes is already created.
+
 ## Usage
 
 Is important to change the following parameters in the file for make the script working:
