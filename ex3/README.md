@@ -1,6 +1,6 @@
 # Exercise 3
 
-The cronjob command is the following `0 23 * * 0 /INSERT_PATH/backup.sh`  
+The cronjob command is the following `0 23 * * 0 backup.sh`  
 The commands inside the backup.sh file will be launched at the 23.00 of each sunday.  
 Backup .sh is composed by two commands, the first to zip the content of the /home/user folder and the second one to send using scp the archive to the remote server.
 ```
