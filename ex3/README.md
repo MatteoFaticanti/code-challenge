@@ -1,6 +1,6 @@
 # Exercise 3
 
-The cronjob command is the following `0 23 * * 0 /path/backup.sh`
+The cronjob command is the following `0 23 * * 0 /INSERT_PATH/backup.sh`
 
 ## Cronjob syntax
 
