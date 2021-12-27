@@ -1,48 +1,48 @@
 #!/bin/bash -e
 
+echo "WordPress Installation"
+
+#insert mysql database username
+db_username='newuser'
+
+#insert mysql database password
+db_psw='Uw+zmg58ntcpLLMB'
+
+# username
 wpuser='exampleuser'
 
-clear
+# databse name
+dbname="new_database2"
 
-echo "================================================================="
-echo "Awesome WordPress Installer!!"
-echo "================================================================="
+# website name
+sitename="wordpress"
 
-# accept user input for the databse name
-echo "Database Name: "
-read -e dbname
+# website url
+domain='http://192.168.178.60'
 
-# accept the name of our website
-echo "Site Name: "
-read -e sitename
-
-# add a simple yes/no confirmation before we proceed
-echo "Run Install? (y/n)"
-read -e run
-
-# if the user didn't say no, then go ahead an install
-if [ "$run" == n ] ; then
-exit
-else
 
 # download the WordPress core files
 wp core download
 
-# create the wp-config file
-wp core config --dbname=$dbname --dbuser=root --dbpass=root
-
 # parse the current directory name
-currentdirectory=${PWD##*/}
+currentdirectory=$(pwd)
 
 # generate random 12 character password
 password=$(LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+= < /dev/urandom | head -c 12)
+
+# create the wp-config file
+wp core config --dbname=$dbname --dbuser=$db_username --dbpass=$db_psw
 
 # create database, and install WordPress
 wp db create
 wp core install --url="http://localhost/$currentdirectory" --title="$sitename" --admin_user="$wpuser" --admin_password="$password" --admin_email="user@example.org"
 
 # install the _s theme
-wp theme install https://github.com/Automattic/_s/archive/master.zip --activate
+wp theme install https://downloads.wordpress.org/theme/twentysixteen.1.2.zip --activate
+
+wp option update home $domain
+
+wp option update siteurl $domain
 
 clear
 
@@ -53,5 +53,3 @@ echo "Username: $wpuser"
 echo "Password: $password"
 echo ""
 echo "================================================================="
-
-fi
